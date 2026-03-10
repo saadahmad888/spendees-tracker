@@ -2,6 +2,7 @@
 import { Outlet, useLocation, Navigate } from 'react-router-dom'
 import AppNavbar from './components/AppNavbar'
 import { useAuth } from './contexts/AuthContext'
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   const { user, loading } = useAuth()
@@ -18,6 +19,14 @@ export default function App() {
   return (
     <div className="app-bg min-vh-100 d-flex flex-column">
       {user && !isAuthPage && <AppNavbar />}
+      <Toaster
+        position="top-right"
+        gutter={12}
+        toastOptions={{
+          duration: 2500,
+          style: { fontSize: "14px" }
+        }}
+      />
       <div className="container py-4 flex-grow-1">
         <Outlet />
       </div>

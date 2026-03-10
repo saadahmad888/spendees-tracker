@@ -2,10 +2,12 @@
 import { Navbar, Container, Nav, NavDropdown, Image } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { useCurrency } from "../contexts/CurrencyContext";
 
 export default function AppNavbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const { currency, setCurrency } = useCurrency();
 
   const onLogout = async () => {
     await logout()
@@ -26,6 +28,13 @@ export default function AppNavbar() {
             <Nav.Link as={Link} to="/todo">To‑Do Lists</Nav.Link>
           </Nav>
           <Nav>
+            <NavDropdown title={`Currency: ${currency}`} align="end">
+              {["PKR", "USD", "QAR", "EUR", "INR"].map((cur) => (
+                <NavDropdown.Item key={cur} onClick={() => setCurrency(cur)}>
+                  {cur}
+                </NavDropdown.Item>
+              ))}
+            </NavDropdown>
             <NavDropdown title={<span className="d-inline-flex align-items-center gap-2"><Image roundedCircle width={28} height={28} src={avatar} alt="avatar" /> {user?.displayName || 'Profile'}</span>} align="end">
               <NavDropdown.Header>
                 <div className="fw-semibold">{user?.displayName || '—'}</div>
