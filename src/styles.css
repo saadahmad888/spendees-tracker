@@ -1,9 +1,195 @@
+:root {
+    --brand: #6f42c1;
+}
 
-:root { --brand: #6f42c1; }
-body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; background: #f7f7fb; }
-.app-bg { background: radial-gradient(1000px 400px at -10% -30%, rgba(111,66,193,0.12), transparent), radial-gradient(1000px 400px at 110% 130%, rgba(32,201,151,0.10), transparent); }
-.card-hover { transition: transform .2s ease, box-shadow .2s ease; }
-.card-hover:hover { transform: translateY(-2px); box-shadow: 0 1rem 2rem rgba(0,0,0,.08); }
-.fade-in { animation: fadeIn .5s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity:1; transform:none; } }
-.brand-gradient { background: linear-gradient(135deg, var(--brand), #20c997); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+body {
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    background: #f7f7fb;
+}
+
+.app-bg {
+    background: radial-gradient(1000px 400px at -10% -30%, rgba(111, 66, 193, 0.12), transparent), radial-gradient(1000px 400px at 110% 130%, rgba(32, 201, 151, 0.10), transparent);
+}
+
+.card-hover {
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .08);
+}
+
+.fade-in {
+    animation: fadeIn .5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.brand-gradient {
+    background: linear-gradient(135deg, var(--brand), #20c997);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.customizeModal .modal-dialog {
+    max-width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.customizeModal .list-group {
+    max-height: 22vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@media only screen and (max-width: 991.98px) {
+    .table {
+        font-size: 10px !important;
+    }
+}
+
+
+/* General dropdown menu */
+.dropdown-custom .nav-link {
+    background-color: #0d6efd;
+    color: #fff;
+    border-radius: 0.5rem;
+    height: 40px;
+    font-size: 14px;
+    padding: 5px 20px !important;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+}
+
+.dropdown-custom .nav-link:focus {
+    background-color: transparent;
+    color: #000;
+    border-color: #000;
+}
+
+.dropdown-custom .nav-link:hover {
+    background-color: transparent;
+    color: #000;
+    border-color: #000;
+}
+
+.dropdown-custom.profile-dropdown .nav-link {
+    background-color: transparent;
+    color: unset;
+    border: 0;
+}
+
+.dropdown-custom.profile-dropdown .nav-link:focus {
+    background-color: transparent;
+    color: unset;
+    border: 0;
+}
+
+.dropdown-custom.profile-dropdown .nav-link:hover {
+    background-color: transparent;
+    color: unset;
+    border: 0;
+}
+
+.dropdown-custom .dropdown-menu {
+    border-radius: 12px;
+    padding: 8px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Smooth animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Items */
+.dropdown-item-custom,
+.dropdown-custom .dropdown-item {
+    border-radius: 8px;
+    padding: 8px 12px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-custom .dropdown-item:hover {
+    background-color: #f1f5f9;
+    transform: translateX(4px);
+}
+
+/* Header styling */
+.dropdown-header-custom {
+    padding: 10px 12px;
+}
+
+/* Avatar */
+.avatar-img {
+    border: 2px solid #e2e8f0;
+}
+
+/* Username responsive */
+.username {
+    font-weight: 500;
+}
+
+/* 🔥 Mobile responsiveness */
+@media (max-width: 768px) {
+    .dropdown-custom .dropdown-menu {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .username {
+        display: none;
+        /* hide text, keep avatar */
+    }
+}
+
+/* Optional: better spacing in navbar */
+.nav-custom {
+    gap: 10px;
+}
+
+
+.home-page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 991.98px) {
+    .home-page-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+        .home-page-heading .btn{
+            margin-block: 20px;
+        }
+}

@@ -67,7 +67,7 @@ export default function FilterBar({ filters, setFilters, onApply, onClear, categ
   return (
     <div className="bg-white rounded shadow-sm p-3">
       <Row className="g-3">
-        <Col md={3}>
+        <Col md={6} lg={3}>
           <Form.Label>From</Form.Label>
           <Form.Control
             type="date"
@@ -76,7 +76,7 @@ export default function FilterBar({ filters, setFilters, onApply, onClear, categ
           />
         </Col>
 
-        <Col md={3}>
+        <Col md={6} lg={3}>
           <Form.Label>To</Form.Label>
           <Form.Control
             type="date"
@@ -86,7 +86,7 @@ export default function FilterBar({ filters, setFilters, onApply, onClear, categ
         </Col>
 
         {/* Spend Category */}
-        <Col md={2}>
+        <Col md={4} lg={2}>
           <Form.Label>Spend Category</Form.Label>
 
           {/* Search box */}
@@ -112,7 +112,7 @@ export default function FilterBar({ filters, setFilters, onApply, onClear, categ
         </Col>
 
         {/* Amount Category */}
-        <Col md={2}>
+        <Col md={4} lg={2}>
           <Form.Label>Amount Category</Form.Label>
 
           <Form.Control
@@ -137,7 +137,7 @@ export default function FilterBar({ filters, setFilters, onApply, onClear, categ
         </Col>
 
         {/* Status Category */}
-        <Col md={2}>
+        <Col md={4} lg={2}>
           <Form.Label>Status</Form.Label>
 
           <Form.Control

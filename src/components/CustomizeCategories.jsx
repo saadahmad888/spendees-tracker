@@ -145,7 +145,7 @@ export default function CustomizeCategories({ show, onHide, onChange, categories
   };
 
   const Section = ({ type, title }) => (
-    <Col md={4}>
+    <Col md={12} lg={4}>
       <div className="d-flex justify-content-between align-items-center mb-2">
         <h6 className="mb-0">{title}</h6>
         <Button size="sm" variant="outline-primary" onClick={() => handleAdd(type)}>
@@ -168,7 +168,7 @@ export default function CustomizeCategories({ show, onHide, onChange, categories
   );
 
   return (
-    <Modal show={show} onHide={handleClose} size="lg" centered>
+    <Modal show={show} className='customizeModal' onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
         <Modal.Title>Customize Categories</Modal.Title>
       </Modal.Header>

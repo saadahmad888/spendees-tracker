@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <div className="fade-in">
-      <div className="d-flex justify-content-between align-items-center mb-3">
+      <div className="home-page-heading mb-3">
         <div className="text-center flex-grow-1">
           <h2 className="fw-bold brand-gradient">Track your spending &amp; stay on top</h2>
           <p className="text-muted mb-0">
@@ -84,7 +84,7 @@ export default function Home() {
       </div>
 
       <Row className="g-4">
-        <Col md={6}>
+        <Col md={12} lg={6}>
           <Card className="border-0 shadow-sm card-hover h-100">
             <Card.Body className="p-4 d-flex flex-column">
               <Card.Title className="mb-2">Spendees</Card.Title>
@@ -97,7 +97,7 @@ export default function Home() {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={6}>
+        <Col md={12} lg={6}>
           <Card className="border-0 shadow-sm card-hover h-100">
             <Card.Body className="p-4 d-flex flex-column">
               <Card.Title className="mb-2">To‑Do Lists</Card.Title>

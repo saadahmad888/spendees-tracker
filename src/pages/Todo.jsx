@@ -81,7 +81,7 @@ export default function Todo() {
       </div>
 
       <Row className="g-3">
-        <Col md={4}>
+        <Col md={12} lg={4}>
           <Card className="shadow-sm">
             <Card.Body>
               <div className="d-flex gap-2 mb-3">
@@ -102,7 +102,7 @@ export default function Todo() {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={8}>
+        <Col md={12} lg={8}>
           <Card className="shadow-sm">
             <Card.Body>
               {!activeListId && <div className="text-muted">Select a list or create a new one.</div>}

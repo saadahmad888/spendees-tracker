@@ -14,6 +14,7 @@ import ExportButtons from '../components/ExportButtons'
 import { filterEntries, groupByDate, getPeriodSums } from '../utils/calculations'
 import LoaderOverlay from "../components/LoaderOverlay";
 import SpendChart from '../components/SpendChart'
+import { useCurrency } from "../contexts/CurrencyContext";
 
 
 const DEFAULT_CATEGORIES = {
@@ -45,6 +46,7 @@ export default function Spendees() {
   const [editItem, setEditItem] = useState(null)
   const [showCat, setShowCat] = useState(false)
   const [loading, setLoading] = useState(false);
+  const { currency } = useCurrency();
 
   // Load categories
   useEffect(() => {
@@ -146,22 +148,37 @@ export default function Spendees() {
   const clearFilters = () => setFilters({ from: '', to: '', spendCategories: [], amountCategories: [], statuses: [] })
 
   const narrative = useMemo(() => {
-    const fromTxt = filters.from ? new Date(filters.from).toLocaleDateString() : 'the beginning'
-    const toTxt = filters.to ? new Date(filters.to).toLocaleDateString() : 'today'
-    const total = filtered.reduce((s, e) => s + Number(e.amount || 0), 0)
-    const count = filtered.length
-    const byStatus = filtered.reduce((acc, e) => { acc[e.status] = (acc[e.status] || 0) + Number(e.amount || 0); return acc }, {})
-    const bySpendCat = filtered.reduce((acc, e) => { acc[e.spendCategory] = (acc[e.spendCategory] || 0) + Number(e.amount || 0); return acc }, {})
-    const topSpend = Object.entries(bySpendCat).sort((a, b) => b[1] - a[1])[0]
-    const currency = new Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD' })
-    return `From ${fromTxt} to ${toTxt}, you recorded ${count} entr${count === 1 ? 'y' : 'ies'} totaling ${currency.format(total)}. ` +
-      `${byStatus['Paid'] ? 'Paid: ' + currency.format(byStatus['Paid']) + '. ' : ''}` +
-      `${byStatus['Paid with Card'] ? 'Paid with Card: ' + currency.format(byStatus['Paid with Card']) + '. ' : ''}` +
-      `${byStatus['Unpaid'] ? 'Unpaid: ' + currency.format(byStatus['Unpaid']) + '. ' : ''}` +
-      `${byStatus['Pending'] ? 'Pending: ' + currency.format(byStatus['Pending']) + '. ' : ''}` +
-      `${byStatus['Borrow'] ? 'Borrow: ' + currency.format(byStatus['Borrow']) + '. ' : ''}` +
-      `${topSpend ? `Top spend category: ${topSpend[0]} (${currency.format(topSpend[1])}).` : ''}`
-  }, [filtered, filters])
+    const fromTxt = filters.from ? new Date(filters.from).toLocaleDateString() : 'the beginning';
+    const toTxt = filters.to ? new Date(filters.to).toLocaleDateString() : 'today';
+
+    const total = filtered.reduce((s, e) => s + Number(e.amount || 0), 0);
+    const count = filtered.length;
+
+    const byStatus = filtered.reduce((acc, e) => {
+      acc[e.status] = (acc[e.status] || 0) + Number(e.amount || 0);
+      return acc;
+    }, {});
+
+    const bySpendCat = filtered.reduce((acc, e) => {
+      acc[e.spendCategory] = (acc[e.spendCategory] || 0) + Number(e.amount || 0);
+      return acc;
+    }, {});
+
+    const topSpend = Object.entries(bySpendCat).sort((a, b) => b[1] - a[1])[0];
+
+    // ✅ FIX: Use selected currency instead of USD
+    const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency });
+
+    return (
+      `From ${fromTxt} to ${toTxt}, you recorded ${count} entr${count === 1 ? 'y' : 'ies'} totaling ${fmt.format(total)}. ` +
+      `${byStatus['Paid'] ? `Paid: ${fmt.format(byStatus['Paid'])}. ` : ''}` +
+      `${byStatus['Paid with Card'] ? `Paid with Card: ${fmt.format(byStatus['Paid with Card'])}. ` : ''}` +
+      `${byStatus['Unpaid'] ? `Unpaid: ${fmt.format(byStatus['Unpaid'])}. ` : ''}` +
+      `${byStatus['Pending'] ? `Pending: ${fmt.format(byStatus['Pending'])}. ` : ''}` +
+      `${byStatus['Borrow'] ? `Borrow: ${fmt.format(byStatus['Borrow'])}. ` : ''}` +
+      `${topSpend ? `Top spend category: ${topSpend[0]} (${fmt.format(topSpend[1])}).` : ''}`
+    );
+  }, [filtered, filters, currency]);
 
   return (
     <div className="fade-in">
@@ -175,17 +192,17 @@ export default function Spendees() {
       </div>
 
       <Row className="g-3 mb-3">
-        <Col md={3}><StatsCard label="Today's Spend" value={sums.daily} variant="primary" /></Col>
-        <Col md={3}><StatsCard label="This Week" value={sums.weekly} variant="success" /></Col>
-        <Col md={3}><StatsCard label="This Month" value={sums.monthly} variant="warning" /></Col>
-        <Col md={3}><StatsCard label="Total" value={sums.total} variant="info" /></Col>
+        <Col md={6} lg={3}><StatsCard label="Today's Spend" value={sums.daily} variant="primary" /></Col>
+        <Col md={6} lg={3}><StatsCard label="This Week" value={sums.weekly} variant="success" /></Col>
+        <Col md={6} lg={3}><StatsCard label="This Month" value={sums.monthly} variant="warning" /></Col>
+        <Col md={6} lg={3}><StatsCard label="Total" value={sums.total} variant="info" /></Col>
       </Row>
 
       <Row className="g-3 mb-3">
-        <Col md={9}>
+        <Col md={12} lg={9}>
           <SpendChart data={chartData} />
         </Col>
-        <Col md={3} className="d-flex flex-column gap-2">
+        <Col md={12} lg={3} className="d-flex flex-column gap-2">
           <div className="bg-white rounded shadow-sm p-3">
             <div className="fw-semibold mb-2">Quick Summary</div>
             <ul className="mb-0 small text-muted">
